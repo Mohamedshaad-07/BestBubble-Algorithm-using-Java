@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class BestBubble {
+
+    static int bubbleSortSwaps(int[] arr, boolean r) {
+        int n = arr.length;
+        int swapCount = 0;
+        int[] tempArr = arr.clone(); 
+       
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if ((!r && tempArr[j] > tempArr[j + 1]) || (r && tempArr[j] < tempArr[j + 1])) {
+                    
+                    int temp = tempArr[j];
+                    tempArr[j] = tempArr[j + 1];
+                    tempArr[j + 1] = temp;
+                    swapCount++;
+                }
+            }
+        }
+
+        return swapCount;
+    }
+    static int minimumSwapsToBeautiful(int[] arr) {
+       
+        int Ascending = bubbleSortSwaps(arr, false);
+        int Descending = bubbleSortSwaps(arr, true);
+        return Math.min(Ascending, Descending);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt(); 
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+       
+        System.out.print(minimumSwapsToBeautiful(arr));
+
+        scanner.close();
+    }
+}
